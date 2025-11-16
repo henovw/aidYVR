@@ -13,7 +13,7 @@ const ImageMarker = (props) => (
   );
 
 function MainMap({ list, selected, onSelect }) {
-
+    const [center, setCenter] = useState({ lat: 49.267535, lng: -123.128936 })
     const defaultProps = {
         center: {
           lat: 49.267535,
@@ -22,6 +22,12 @@ function MainMap({ list, selected, onSelect }) {
         zoom: 13
       };
     const apiKey="AIzaSyBbv1HmlxvjKw8TfpeMszI8I5vUaPqUqTQ"
+
+    const handleClick = ({lat, lng, item}) => {
+        onSelect(item)
+        setCenter({lat,lng})
+    }
+
     return (
         <div className="mainContainer">
     
@@ -29,7 +35,7 @@ function MainMap({ list, selected, onSelect }) {
 
         <GoogleMapReact
         bootstrapURLKeys={{ key: apiKey }}
-        defaultCenter={defaultProps.center}
+        center={center}
         defaultZoom={defaultProps.zoom}
         >
         {list.map((item) => (
@@ -38,7 +44,7 @@ function MainMap({ list, selected, onSelect }) {
             lat={item.lat}
             lng={item.lng}
             img={item.img}
-            onClick={() => onSelect(item)}
+            onClick={() => handleClick({ lat: item.lat, lng: item.lng, item })}
             />
         ))}
 

@@ -18,6 +18,7 @@
 } .charity:hover {
     background-color: rgb(226, 226, 226);
     transform: translate(0px, -3px);
+    cursor: pointer;
 }
 .selected {
     background-color: white;
