@@ -1,0 +1,99 @@
+.main {
+    width: 30%;
+    height: 80vh;
+    overflow: auto;
+}
+
+.image {
+    width: 120px;
+    height: 120px;
+}
+.charity {
+    width: 90%;
+    padding: 12px;
+    background-color: lightgray;
+    border-radius: 20px;
+    transition: 0.2s;
+    margin: 10px;
+} .charity:hover {
+    background-color: rgb(226, 226, 226);
+    transform: translate(0px, -3px);
+}
+.selected {
+    background-color: white;
+    box-shadow: 0 0 5px black;
+} .selected:hover {
+    background-color: white;
+}
+.categorya {
+    padding: 5px;
+    background-image: linear-gradient(130deg, rgb(223, 148, 223), rgb(154, 127, 227));
+    font-weight: bold;
+    font-size: medium;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin: 3px;
+}
+
+.descriptor {
+    padding: 6px;
+    background-image: linear-gradient(40deg, #d3e476, rgb(83, 236, 103));
+    font-weight: bold;
+    font-size: larger;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin: 3px;
+    width: max-content;
+    height: max-content;
+}
+
+.description {
+    padding: 5px;
+    background-color: rgb(237, 237, 237);
+    border-radius: 10px;
+    margin: 10px;
+    font-size: larger;
+} .titleDescription {
+    margin: 10px;
+    display: inline;
+    text-align: start;
+} .titleDescription>h2 {
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.titlecard {
+    display: flex;
+}
+.link {
+    padding: 8px;
+    background-color: rgb(242, 202, 137);
+    font-weight: bold;
+    font-size: larger;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin: 3px;
+    border: 5px solid black;
+    transition: 0.2s;
+} .link:hover {
+    background-color: rgb(255, 238, 0);
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+.needs {
+    padding: 7px;
+    background-image: linear-gradient(10deg, rgb(247, 129, 123), rgb(229, 206, 93));
+    font-weight: bold;
+    font-size: larger;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin: 3px;
+}
