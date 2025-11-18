@@ -1,7 +1,11 @@
 const data = [
     {
       name: "BC Cancer Foundation",
-      description: "Contributing towards curing diseases to save lives",
+      title: "Wayfinding Assistance",
+      description: "Help families and patients find their way to appointments and meetings.",
+      daysPerWeek: "5",
+      hoursPerShift: "3",
+      termLength: "6 months",
       longDescription: "BC Cancer Foundation funds life-saving cancer research and patient care in British Columbia, supporting prevention, treatment, and innovation to improve outcomes for those affected by cancer.",
       category: "Medical research",
       donatelink: "https://bccancerfoundation.com/donations/donations-changes-everything/?s_src=googleEvergreenH&utm_medium=cpc&utm_source=googleEvergreenH&utm_campaign=EOY25&gad_source=1&gad_campaignid=23273507695&gbraid=0AAAAADwT5GGWwi7kvCH7utaYHz2gqryuv&gclid=Cj0KCQiAiebIBhDmARIsAE8PGNLSeAryD1_dh_puvGg_4PS8MmKdnrthupi_9Hj20CSS_eBNmLgWT5caAncjEALw_wcB",
@@ -15,13 +19,18 @@ const data = [
         "Medical assistance",
       ],
       needs: [
-        "Volunteers",
-        "Financial contributions",
+        "Positive attitude",
+        "18+ age",
+        "Teamwork",
       ]
     },
     {
       name: "Vancouver Food Bank",
-      description: "Organizing food delivery to the underpriveledged",
+      title: "Food Delivery Driver",
+      description: "Deliver meals to those who need support.",
+      daysPerWeek: "2",
+      hoursPerShift: "4",
+      termLength: "2 months",
       longDescription: "Vancouver Food Bank provides essential food and support to individuals and families in need, working to reduce hunger and strengthen community well-being across the city.",
       donatelink: "https://foodbank.bc.ca",
       applylink: "https://foodbank.bc.ca/volunteer/individual-volunteers/",
@@ -32,18 +41,21 @@ const data = [
       categories: [
         "Food Bank",
         "Feeding Homeless",
-        "Accepting Donations"
+        "Delivery Driver"
       ],
       needs: [
-        "Kids clothes",
-        "Parents clothes",
-        "Mitts and toques"
+        "Ability to drive",
+        "Can-do Attitude",
+        "Adapt on the go"
       ]
     },
     {
         name: "Parkinson's Canada",
         title: "Support Group Facilitator",
-        description: "Supporting those with Parkinson's and research",
+        description: "Attend support groups and help attendees.",
+        daysPerWeek: "3",
+        hoursPerShift: "2",
+        termLength: "5 months",
         longDescription: "Parkinson Canada’s mission is to improve the quality of life for people living with Parkinson’s through support, education, research, and advocacy for better care and treatments.",
         donatelink: "https://donate.parkinson.ca",
         applylink: "https://www.parkinson.ca/get-involved/volunteer/",
@@ -57,8 +69,8 @@ const data = [
             "Medical research",
         ],
         needs: [
-            "Financial donations",
-            "Volunteers"
+            "Leadership qualities",
+            "Ability to have hard conversations"
         ]
     }
   ]

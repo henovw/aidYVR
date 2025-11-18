@@ -58,7 +58,9 @@ function MainMap({ list, selected, onSelect }) {
             img={selected.img}
             categories={selected.categories}
             needs={selected.needs}
-            link={selected.donatelink}
+            donatelink={selected.donatelink}
+            applylink={selected.applylink}
+            title={selected.title}
             />
         )}
         </GoogleMapReact>
