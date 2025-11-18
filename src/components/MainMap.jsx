@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GoogleMapReact from 'google-map-react';
 import './MainMap.css'
 import MiniDesc from "./MiniDesc"
@@ -27,11 +27,18 @@ function MainMap({ list, selected, onSelect }) {
         onSelect(item)
         setCenter({lat,lng})
     }
+    useEffect(() => {
+        if (selected) {
+            setCenter({
+            lat: selected.lat,
+            lng: selected.lng,
+            });
+        }
+    }, [selected]);
+
 
     return (
         <div className="mainContainer">
-    
-
 
         <GoogleMapReact
         bootstrapURLKeys={{ key: apiKey }}
