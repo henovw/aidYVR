@@ -21,7 +21,7 @@ function MainMap({ list, selected, onSelect }) {
         },
         zoom: 13
       };
-    const apiKey="AIzaSyBbv1HmlxvjKw8TfpeMszI8I5vUaPqUqTQ"
+    const apiKey=import.meta.env.VITE_API_KEY
 
     const handleClick = ({lat, lng, item}) => {
         onSelect(item)
@@ -58,7 +58,7 @@ function MainMap({ list, selected, onSelect }) {
             img={selected.img}
             categories={selected.categories}
             needs={selected.needs}
-            link={selected.link}
+            link={selected.donatelink}
             />
         )}
         </GoogleMapReact>

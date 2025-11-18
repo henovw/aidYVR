@@ -1,29 +1,11 @@
 const data = [
     {
-      name: "KFC",
-      description: "Giving food to the homeless",
-      longDescription: "KFC is a global fast-food chain famous for its fried chicken, offering quick, flavorful meals with a focus on its secret recipe of 11 herbs and spices.",
-      category: "Soup kitchen",
-      link: "https://kfc.ca",
-      lat: 49.267535,
-      lng: -123.128936,
-      img: "https://images.seeklogo.com/logo-png/17/1/kfc-logo-png_seeklogo-176326.png",
-      categories: [
-        "Restaurant",
-        "Open 24/7"
-      ],
-      needs: [
-        "Dry ingredients",
-        "Frozen food",
-        "Rat meat"
-      ]
-    },
-    {
       name: "BC Cancer Foundation",
       description: "Contributing towards curing diseases to save lives",
       longDescription: "BC Cancer Foundation funds life-saving cancer research and patient care in British Columbia, supporting prevention, treatment, and innovation to improve outcomes for those affected by cancer.",
       category: "Medical research",
-      link: "https://bccancerfoundation.com/donations/donations-changes-everything/?s_src=googleEvergreenH&utm_medium=cpc&utm_source=googleEvergreenH&utm_campaign=EOY25&gad_source=1&gad_campaignid=23273507695&gbraid=0AAAAADwT5GGWwi7kvCH7utaYHz2gqryuv&gclid=Cj0KCQiAiebIBhDmARIsAE8PGNLSeAryD1_dh_puvGg_4PS8MmKdnrthupi_9Hj20CSS_eBNmLgWT5caAncjEALw_wcB",
+      donatelink: "https://bccancerfoundation.com/donations/donations-changes-everything/?s_src=googleEvergreenH&utm_medium=cpc&utm_source=googleEvergreenH&utm_campaign=EOY25&gad_source=1&gad_campaignid=23273507695&gbraid=0AAAAADwT5GGWwi7kvCH7utaYHz2gqryuv&gclid=Cj0KCQiAiebIBhDmARIsAE8PGNLSeAryD1_dh_puvGg_4PS8MmKdnrthupi_9Hj20CSS_eBNmLgWT5caAncjEALw_wcB",
+      applylink: "https://www.bccancer.bc.ca/our-services/centres-clinics/bc-cancer-vancouver/volunteer",
       lat: 49.263279,
       lng: -123.120310,
       img: "data:image/png;base64,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",
@@ -41,7 +23,8 @@ const data = [
       name: "Vancouver Food Bank",
       description: "Organizing food delivery to the underpriveledged",
       longDescription: "Vancouver Food Bank provides essential food and support to individuals and families in need, working to reduce hunger and strengthen community well-being across the city.",
-      link: "https://foodbank.bc.ca",
+      donatelink: "https://foodbank.bc.ca",
+      applylink: "https://foodbank.bc.ca/volunteer/individual-volunteers/",
       category: "Food bank",
       lat: 49.282630,
       lng: -123.134956,
@@ -59,9 +42,11 @@ const data = [
     },
     {
         name: "Parkinson's Canada",
+        title: "Support Group Facilitator",
         description: "Supporting those with Parkinson's and research",
         longDescription: "Parkinson Canada’s mission is to improve the quality of life for people living with Parkinson’s through support, education, research, and advocacy for better care and treatments.",
-        link: "https://donate.parkinson.ca",
+        donatelink: "https://donate.parkinson.ca",
+        applylink: "https://www.parkinson.ca/get-involved/volunteer/",
         category: "Medical research",
         lat: 49.287323,
         lng: -123.117493,

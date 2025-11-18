@@ -11,8 +11,8 @@ function App() {
   return (
     <div>
         <div className="maintitle">
-            <h1>NeighborGood</h1>
-            <h2>nwHacks HackCamp 2025</h2>
+            <h1>OfferMe</h1>
+            <h2>garage-sale-finder</h2>
         </div>
 
     <div className="app">

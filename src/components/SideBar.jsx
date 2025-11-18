@@ -32,7 +32,7 @@ const SideBarCharityPop = ({ item, onClick, isSelected }) => (
     </div>
 
     <br></br>
-            <a href={item.link} target="_blank">
+            <a href={item.donatelink} target="_blank">
             <button className="link">Donate 🥰</button>
             </a>
   </div>
