@@ -34,7 +34,7 @@ function MainMap({ list, selected, onSelect }) {
             lng: selected.lng,
             });
         }
-    }, [selected]);
+    }, [selected])
 
 
     return (

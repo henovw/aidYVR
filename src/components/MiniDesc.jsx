@@ -12,12 +12,12 @@ function MiniDesc(props) {
             <h1>{props.title}</h1>
             <br></br>
             <div class="categories">
-                
+            
             {props.categories.map(item => (
-                <p className="category" key={item}>{item}</p>
+                <p className="category">{item}</p>
             ))}
             {props.needs.map(item => (
-                <p className="need" key={item}>{item}</p>
+                <p className="need">{item}</p>
             ))}
             </div>
                 <br></br>

@@ -54,7 +54,7 @@ function SideBarCharityPop({ item, onClick, isSelected }) {
         <p className="needs" key={need}>{need}</p>
       ))}
     </div>
-
+      <div className="links">
       <br></br>
       <a href={item.applylink} target="_blank">
         <button className="apply">Apply</button>
@@ -64,6 +64,7 @@ function SideBarCharityPop({ item, onClick, isSelected }) {
             <a href={item.donatelink} target="_blank">
             <button className="donate">Donate 🥰</button>
             </a>
+            </div>
   </div>
     )
 }
