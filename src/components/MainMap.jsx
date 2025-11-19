@@ -19,7 +19,7 @@ function MainMap({ list, selected, onSelect }) {
           lat: 49.267535,
           lng: -123.128936
         },
-        zoom: 13
+        zoom: 13.4
       };
     const apiKey=import.meta.env.VITE_API_KEY
 
@@ -33,7 +33,7 @@ function MainMap({ list, selected, onSelect }) {
             lat: selected.lat,
             lng: selected.lng,
             });
-        }
+        } 
     }, [selected])
 
 

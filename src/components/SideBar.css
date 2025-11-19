@@ -137,3 +137,10 @@ a {
     margin: 7px;
     gap: 5px;
 }
+
+.categories-sidebar {
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: flex-start;
+    align-items: center; 
+}

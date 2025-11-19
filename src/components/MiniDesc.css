@@ -28,11 +28,13 @@
     margin: 3px;
 }
 
-.categories {
+.categories-minidesc {
     display: flex;
     flex-wrap:wrap;
     justify-content: flex-start;
     align-items: center; 
+    border: 2px solid rgb(194, 194, 194);
+    border-radius: 5px;
 }
 
 .need {

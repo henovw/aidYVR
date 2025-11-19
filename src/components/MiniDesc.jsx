@@ -11,7 +11,7 @@ function MiniDesc(props) {
             </div>
             <h1>{props.title}</h1>
             <br></br>
-            <div class="categories">
+            <div class="categories-minidesc">
             
             {props.categories.map(item => (
                 <p className="category">{item}</p>

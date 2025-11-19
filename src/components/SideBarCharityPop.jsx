@@ -26,7 +26,7 @@ function SideBarCharityPop({ item, onClick, isSelected }) {
     <h3>{item.name}</h3>
     
     <p className="descriptor">{item.category}</p>
-    <div className="categories">
+    <div className="categories-sidebar">
       {item.categories.map((cat) => (
         <p className="categorya" key={cat}>{cat}</p>
       ))}
@@ -38,7 +38,7 @@ function SideBarCharityPop({ item, onClick, isSelected }) {
     <p className="description">{item.description}</p>
 
     <h3>Shift hours:</h3>
-    <div className="categories">
+    <div className="categories-sidebar">
         <p className="time">Days per week: {item.daysPerWeek}</p>
         <p className="time">Hours per shift: {item.hoursPerShift}</p>
         <p className="time">Term length: {item.termLength}</p>
@@ -49,7 +49,7 @@ function SideBarCharityPop({ item, onClick, isSelected }) {
 
 
     <h3>What you bring:</h3>
-    <div className="categories">
+    <div className="categories-sidebar">
       {item.needs.map((need) => (
         <p className="needs" key={need}>{need}</p>
       ))}

@@ -12,6 +12,7 @@
   "dependencies": {
     "firebase": "^12.6.0",
     "google-map-react": "^2.2.5",
+    "postgresql": "^0.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-native": "^0.80.2",

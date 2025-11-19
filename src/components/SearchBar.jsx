@@ -1,8 +1,11 @@
 import "./SearchBar.css"
 
-function SearchBar({ selectCategory, onSelectCategory, categories }) {
+function SearchBar({ selectCategory, onSelectCategory, categories, selectItem }) {
     
-
+    function onClickedCategory(item) {
+        onSelectCategory(item)
+        selectItem(null)
+    }
 
 
     return (
@@ -10,7 +13,7 @@ function SearchBar({ selectCategory, onSelectCategory, categories }) {
             <div className="searchbar-categories">
             {categories.map((item) => (
                 <span className={`searchbar-category ${selectCategory === item ? "selected-searchbar" : ""}`}
-                    onClick={() => onSelectCategory(item)}>{item}</span>
+                    onClick={() => onClickedCategory(item)}>{item}</span>
             ))}
             </div>
         </div>
