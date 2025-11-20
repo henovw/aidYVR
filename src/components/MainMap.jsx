@@ -7,7 +7,7 @@ const ImageMarker = (props) => (
     <div className="iconDiv" onClick={props.onClick}>
       <img 
         className="iconImage"
-        src={props.img}
+        src={props.logo}
       />
     </div>
   );
@@ -19,7 +19,7 @@ function MainMap({ list, selected, onSelect }) {
           lat: 49.267535,
           lng: -123.128936
         },
-        zoom: 13.4
+        zoom: 12.3
       };
     const apiKey=import.meta.env.VITE_API_KEY
 
@@ -47,24 +47,24 @@ function MainMap({ list, selected, onSelect }) {
         >
         {list.map((item) => (
             <ImageMarker
-            key={item.id}
+            key={item.job_id}
             lat={item.lat}
             lng={item.lng}
-            img={item.img}
+            logo={item.logo}
             onClick={() => handleClick({ lat: item.lat, lng: item.lng, item })}
             />
         ))}
 
         {selected && (
             <MiniDesc
-            name={selected.name}
-            description={selected.description}
+            name={selected.org_name}
+            description={selected.job_description}
             onClose={() => onSelect(null)}
             lat={selected.lat}
             lng={selected.lng}
-            img={selected.img}
-            categories={selected.categories}
-            needs={selected.needs}
+            img={selected.logo}
+            categories={selected.org_categories}
+            needs={selected.jobneeds}
             donatelink={selected.donatelink}
             applylink={selected.applylink}
             title={selected.title}

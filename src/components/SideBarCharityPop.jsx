@@ -1,7 +1,7 @@
 
 
 import "./SideBar.css"
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 function SideBarCharityPop({ item, onClick, isSelected }) {
     const ref = useRef(null)
@@ -12,22 +12,34 @@ function SideBarCharityPop({ item, onClick, isSelected }) {
     }
     }, [isSelected])
 
+    const [orgCategories, setOrgCategories] = useState([]);
+    const [jobNeeds, setJobNeeds] = useState([]);
+
+    useEffect(() => {
+        if (item.org_categories) {
+            setOrgCategories(item.org_categories.split(";").filter(Boolean));
+        }
+        if (item.jobneeds) {
+            setJobNeeds(item.jobneeds.split(";").filter(Boolean));
+        }
+    }, [item.org_categories, item.jobneeds]); 
 
     return (
   <div
+    key={item.job_id}
     ref={ref}
-    className={`charity ${isSelected ? "selected" : ""}`}
+    className={`charity ${isSelected ? "selected-sidebar" : ""}`}
     onClick={onClick}>
         
     <div className="titlecard">
-    <img className="image" src={item.img} />
+    <img className="image" src={item.logo} />
     <div className="titleDescription">
     <h2>{item.title}</h2>
-    <h3>{item.name}</h3>
+    <h3>{item.orgname}</h3>
     
-    <p className="descriptor">{item.category}</p>
+    <p className="descriptor">{item.org_category}</p>
     <div className="categories-sidebar">
-      {item.categories.map((cat) => (
+      {orgCategories.map((cat) => (
         <p className="categorya" key={cat}>{cat}</p>
       ))}
       </div>
@@ -35,22 +47,22 @@ function SideBarCharityPop({ item, onClick, isSelected }) {
     </div>
 
     <h3>Opportunity description:</h3>
-    <p className="description">{item.description}</p>
+    <p className="description">{item.job_description}</p>
 
     <h3>Shift hours:</h3>
     <div className="categories-sidebar">
-        <p className="time">Days per week: {item.daysPerWeek}</p>
-        <p className="time">Hours per shift: {item.hoursPerShift}</p>
-        <p className="time">Term length: {item.termLength}</p>
+        <p className="time">Days per week: {item.daysperweek}</p>
+        <p className="time">Hours per shift: {item.hourspershift}</p>
+        <p className="time">Term length: {item.termlength}</p>
     </div>
 
     <h3>About us:</h3>
-    <p className="description">{item.longDescription}</p>
+    <p className="description">{item.org_description}</p>
 
 
     <h3>What you bring:</h3>
     <div className="categories-sidebar">
-      {item.needs.map((need) => (
+      {jobNeeds.map((need) => (
         <p className="needs" key={need}>{need}</p>
       ))}
     </div>

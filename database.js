@@ -19,9 +19,35 @@ const client = new Client({
 
 await client.connect()
 
-app.get("/api/charities", async (req, res) => {
+app.get("/api/orgsWithJobs", async (req, res) => {
     try {
-        const result = await client.query(`Select * from charity`)
+        const result = await client.query(`
+            SELECT 
+                p.id AS job_id,
+                p.title,
+                p.description AS job_description,
+                p.posted_date,
+                p.daysperweek,
+                p.hourspershift,
+                p.termlength,
+                p.applylink,
+                p.jobneeds,
+                o.id AS organization_id,
+                o.orgname,
+                o.email,
+                o.category AS org_category,
+                o.donatelink,
+                p.lat,
+                p.lng,
+                o.logo,
+                o.categories AS org_categories,
+                o.description AS org_description
+            FROM posting p
+            JOIN organization o
+            ON p.organization_id = o.id
+            ORDER BY o.id, p.id;
+
+            `)
         res.json(result.rows)
     } catch (e) {
         res.status(500).json({ error: e.message })

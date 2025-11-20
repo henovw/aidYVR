@@ -11,11 +11,8 @@ function App() {
 
     // database access
     const [charityData, setData] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState([])
-
     useEffect(() => {
-        fetch("http://localhost:2000/api/charities")
+        fetch("http://localhost:2000/api/orgsWithJobs")
             .then(res => 
                 res.json()
             )
@@ -29,14 +26,18 @@ function App() {
 
     // category selection
     const [selectedCategory, setSelectedCategory] = useState("View all")
-    const categories = ["View all"].concat([...new Set(charityData.map(item => item.category))])
+    
+    const categories= ["View all"].concat(
+        charityData && Array.isArray(charityData)
+        ? [...new Set(charityData.map(item => item.org_category))] : [])
+
     const filteredCharities = charityData.filter((item) => {
         if (selectedCategory == null) {
             return true
         } else if (selectedCategory == "View all") {
             return true
         } else {
-            return item.category == selectedCategory
+            return item.org_category == selectedCategory
         }
     })
 
@@ -54,7 +55,8 @@ function App() {
     <div className="mainmap">
         <SideBar list={filteredCharities} selected={selected} 
             onSelect={setSelected} onSelectCategory={setSelectedCategory}
-            categories = {categories} selectCategory={selectedCategory} />
+            categories = {categories} selectCategory={selectedCategory}
+             />
         <MainMap list={filteredCharities} selected={selected} onSelect={setSelected} />
     </div>
     </div>
