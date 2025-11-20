@@ -20,7 +20,7 @@ function SideBar(props) {
         <SideBarCharityPop
           item={item}
           onClick={() => props.onSelect(item)}
-          isSelected={props.selected?.title === item.title}
+          isSelected={props.selected?.job_id === item.job_id}
           key={item.job_id}
         />
       ))}
