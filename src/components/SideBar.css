@@ -136,6 +136,7 @@ a {
     display: flex;
     margin: 7px;
     gap: 5px;
+    align-items: center;
 }
 
 .categories-sidebar {

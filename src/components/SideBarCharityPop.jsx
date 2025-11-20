@@ -15,6 +15,12 @@ function SideBarCharityPop({ item, onClick, isSelected }) {
     const [orgCategories, setOrgCategories] = useState([]);
     const [jobNeeds, setJobNeeds] = useState([]);
 
+    const datePosted = new Date(item.posted_date).toLocaleDateString("en-CA", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    });
+
     useEffect(() => {
         if (item.org_categories) {
             setOrgCategories(item.org_categories.split(";").filter(Boolean));
@@ -76,6 +82,7 @@ function SideBarCharityPop({ item, onClick, isSelected }) {
             <a href={item.donatelink} target="_blank">
             <button className="donate">Donate 🥰</button>
             </a>
+            <p>Posted {datePosted}</p>
             </div>
   </div>
     )

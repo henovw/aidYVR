@@ -22,4 +22,6 @@
     width: 80%;
     height: 80vh;
     background-color: transparent;
-}
+    overflow: hidden;
+    border-radius: 0px 10px 10px 0px;
+} 

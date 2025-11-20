@@ -17,6 +17,7 @@
 .maintitle {
     display: flex;
     margin: 10px;
+    align-items: center;
 }.maintitle>h1 {
     background-color: coral;
     padding: 20px;
