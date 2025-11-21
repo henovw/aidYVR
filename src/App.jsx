@@ -1,6 +1,7 @@
 import "./App.css";
-import MainMap from "./components/MainMap.jsx"
-import SideBar from "./components/SideBar.jsx"
+import MainMap from "./components/MainPage/MainMap.jsx"
+import SideBar from "./components/MainPage/SideBar.jsx"
+import SignupLoginMain from "./components/MainPage/SignupLoginMain.jsx";
 import { useState, useEffect } from "react"
 import Charities from "./data/Charities.jsx"
 
@@ -59,6 +60,8 @@ function App() {
              />
         <MainMap list={filteredCharities} selected={selected} onSelect={setSelected} />
     </div>
+    <SignupLoginMain/>
+
     </div>
   )
 }

@@ -22,7 +22,7 @@ function MiniDesc(props) {
         <button className="exit" onClick={props.onClose}><img src="src/assets/xbutton.png"></img></button>
             <img className="minidesc-image" src={props.img}></img>
             </div>
-            <h1>{props.title}</h1>
+            <h1 style={{"display": "flex", "text-align": "left", "margin-left": "5px"}}>{props.title}</h1>
             <br></br>
             <div className="categories-minidesc">
             

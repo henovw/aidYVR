@@ -1,6 +1,7 @@
 import pkg from 'pg';
 import cors from 'cors';
 import express from 'express';
+import bcrypt from "bcrypt";
 
 const { Client } = pkg;
 
@@ -46,12 +47,29 @@ app.get("/api/orgsWithJobs", async (req, res) => {
             JOIN organization o
             ON p.organization_id = o.id
             ORDER BY o.id, p.id;
-
             `)
         res.json(result.rows)
     } catch (e) {
         res.status(500).json({ error: e.message })
     }
 })
+
+app.post("/api/org/signup", async (req, res) => {
+    const { orgname, email, category, donatelink, description } = req.body
+    try {
+        const hashed = bcrypt.hash(password, 10)
+
+        await client.query(`
+            INSERT INTO organization (orgname, email, category, donatelink, description)
+            VALUES ($1, $2, $3, $4, $5)
+            `, [orgname, email, category, donatelink, description])
+
+        res.json({ success: true })
+
+    } catch (e) {
+        res.status(500).json({ error: e.message })
+    }
+})
+
 
 app.listen(2000, () => console.log("API server running on port 2000"))
