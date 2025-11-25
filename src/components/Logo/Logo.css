@@ -9,5 +9,6 @@
     box-shadow: 0px 0px 3px grey;
 }.maintitle>h2 {
     padding: 20px;
-
+} .maintitle>h1:hover {
+    cursor: pointer;
 }

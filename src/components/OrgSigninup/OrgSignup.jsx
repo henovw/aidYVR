@@ -17,6 +17,7 @@ function OrgSignup() {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
 
 
   function onChange(e) {
@@ -59,7 +60,7 @@ function OrgSignup() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Signup failed");
       alert("Organization created!");
-
+      navigate("/")
     } catch (err) {
       setError(err.message);
     } finally {

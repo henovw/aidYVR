@@ -2,6 +2,7 @@ import pkg from 'pg';
 import cors from 'cors';
 import express from 'express';
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const { Client } = pkg;
 
@@ -38,6 +39,7 @@ app.get("/api/orgsWithJobs", async (req, res) => {
                 o.email,
                 o.category AS org_category,
                 o.donatelink,
+                p.categories AS categories,
                 p.lat,
                 p.lng,
                 o.logo,
@@ -87,5 +89,20 @@ app.post("/api/org/signup", async (req, res) => {
   }
 });
 
+app.post("/api/org/signin", async (req, res) => {
+    const { email, password } = req.body
+
+    const result = await client.query("SELECT id, hashed_password FROM organization WHERE email=$1", [email])
+    if (result.rowCount == 0) {
+        throw new Error("Invalid credentials.");
+    }
+
+    const user = result.rows[0];
+    const ok = await bcrypt.compare(password, user.hashed_password);
+    if (!ok) throw new Error("Invalid credentials.");
+
+    const returnable = await client.query("SELECT * FROM organization WHERE email=$1", [email])
+    res.json(returnable.rows)
+})
 
 app.listen(2000, () => console.log("API server running on port 2000"))
