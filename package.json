@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "firebase": "^12.6.0",
@@ -20,7 +21,8 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-native": "^0.80.2",
-    "react-native-maps": "^1.26.0"
+    "react-native-maps": "^1.26.0",
+    "react-router-dom": "^7.9.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.38.0",

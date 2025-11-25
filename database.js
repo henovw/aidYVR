@@ -41,7 +41,6 @@ app.get("/api/orgsWithJobs", async (req, res) => {
                 p.lat,
                 p.lng,
                 o.logo,
-                o.categories AS org_categories,
                 o.description AS org_description
             FROM posting p
             JOIN organization o
@@ -55,14 +54,16 @@ app.get("/api/orgsWithJobs", async (req, res) => {
 })
 
 app.post("/api/org/signup", async (req, res) => {
-    const { orgname, email, category, donatelink, description } = req.body
+    const { orgname, email, category, donatelink, description,
+        logo, categories
+     } = req.body
     try {
         const hashed = bcrypt.hash(password, 10)
 
         await client.query(`
             INSERT INTO organization (orgname, email, category, donatelink, description)
-            VALUES ($1, $2, $3, $4, $5)
-            `, [orgname, email, category, donatelink, description])
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            `, [orgname, email, category, donatelink, description, logo, categories])
 
         res.json({ success: true })
 

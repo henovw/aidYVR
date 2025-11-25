@@ -1,0 +1,89 @@
+.signinup-user-mainpage {
+    margin: 20px;
+    background-image: linear-gradient(10deg, rgb(210, 255, 121), rgb(53, 237, 154));
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 30px;
+    gap: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 3px darkgrey;
+    transition: 0.4s;
+}.signinup-user-mainpage:hover {
+    transform:translateY(-2px);
+    box-shadow: 0px 3px 5px darkgrey;
+}
+
+.user-signin-link {
+    background: rgba(255, 255, 255, 0.4); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    padding: 10px;
+    transition: 0.2s;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: larger;
+}.user-signin-link:hover {
+    background: rgba(255, 255, 255, 0.6);
+    scale: 1.01;
+    cursor: pointer;
+}
+
+.user-signup-link {
+    background: rgba(255, 255, 255, 0.4); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    padding: 10px;
+    transition: 0.2s;
+    border-radius: 10px;
+    font-size: larger;
+}.user-signup-link:hover {
+    background: rgba(255, 255, 255, 0.6);
+    scale: 1.01;
+    cursor: pointer;
+}
+
+.signinup-org-mainpage {
+    margin: 20px;
+    background-image: linear-gradient(10deg, rgb(255, 121, 237), rgb(53, 65, 237));
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 30px;
+    gap: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 3px darkgrey;
+    transition: 0.4s;
+}.signinup-org-mainpage:hover {
+    transform:translateY(-2px);
+    box-shadow: 0px 3px 5px darkgrey;
+}
+.org-signin-link {
+    background: rgba(255, 255, 255, 0.4); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    padding: 10px;
+    transition: 0.2s;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: larger;
+}.org-signin-link:hover {
+    background: rgba(255, 255, 255, 0.6);
+    scale: 1.01;
+    cursor: pointer;
+    /* box-shadow: 0px 0px 6px white; */
+}
+
+.org-signup-link {
+    background: rgba(255, 255, 255, 0.4); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    padding: 10px;
+    transition: 0.2s;
+    border-radius: 10px;
+    font-size: larger;
+}.org-signup-link:hover {
+    background: rgba(255, 255, 255, 0.6);
+    scale: 1.01;
+    cursor: pointer;
+}
