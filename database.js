@@ -55,22 +55,37 @@ app.get("/api/orgsWithJobs", async (req, res) => {
 
 app.post("/api/org/signup", async (req, res) => {
     const { orgname, email, category, donatelink, description,
-        logo, categories
+        logo, password, lat, lng
      } = req.body
-    try {
-        const hashed = bcrypt.hash(password, 10)
 
-        await client.query(`
-            INSERT INTO organization (orgname, email, category, donatelink, description)
-            VALUES ($1, $2, $3, $4, $5, $6, $7)
-            `, [orgname, email, category, donatelink, description, logo, categories])
-
-        res.json({ success: true })
-
-    } catch (e) {
-        res.status(500).json({ error: e.message })
+    if (!orgname || !email || !password) {
+        return res.status(400).json({ error: "Missing required fields" });
     }
-})
+    try {
+    // Check email uniqueness
+    const exists = await client.query("SELECT id FROM organization WHERE email = $1", [email]);
+    if (exists.rowCount > 0) {
+        return res.status(409).json({ error: "Email already in use" });
+    }
+
+    // Hash password
+    const hashed = await bcrypt.hash(password, 10);
+
+    const insertSQL = `
+        INSERT INTO organization
+        (orgname, email, hashed_password, category, donatelink, description, logo)
+        VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING id, orgname, email
+        `;
+    const result = await client.query(insertSQL, [
+      orgname, email, hashed, category, donatelink, description, logo
+    ]);
+
+    res.status(201).json({ success: true, org: result.rows[0] });
+  } catch (err) {
+    console.error("Signup Error:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 
 app.listen(2000, () => console.log("API server running on port 2000"))

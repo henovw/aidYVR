@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import Logo from "../Logo/Logo.jsx"
 import { useNavigate } from "react-router-dom";
 import "./OrgSignup.css"
 
@@ -12,8 +13,7 @@ function OrgSignup() {
     category: "",
     donatelink: "", 
     description: "",
-    lat: "",
-    lng: ""
+    logo: ""
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,8 @@ function OrgSignup() {
   }
 
   const mainCategories = [
-    "Medical support", "Medical research", "Social support", "Food security", "Child care"
+    "Medical support", "Medical research", "Social support", "Food security", "Child care",
+    "Animal support"
   ]
 
   async function onSubmit(e) {
@@ -46,20 +47,19 @@ function OrgSignup() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          orgName: form.orgname,
+          orgname: form.orgname,
           email: form.email,
           password: form.password,
           category: form.category,
           donatelink: form.donatelink, 
           description: form.description,
-          lat: form.lat || null,
-          lng: form.lng || null
+          logo: form.logo
         })
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Signup failed");
       alert("Organization created!");
-      useNavigate()
+
     } catch (err) {
       setError(err.message);
     } finally {
@@ -68,42 +68,55 @@ function OrgSignup() {
   }
 
   return (
+    <div><Logo/>
+    
+    <div className="orgsignup-main">
+    <div className="orgsignup-description">
+        <h1 className="orgsignup-title">Register your Organization</h1> 
+        <h2>Register your organization with aidYVR and start making job postings to attract the best applicants in Canada.</h2>
+        <span>aidYVR has found over 100 local organizations amazing volunteers. 
+            By registering your organization with us, you are allowing thousands of applicants to view your positions
+            and help make the world a better place.
+        </span>
+    </div>
     <form onSubmit={onSubmit} className="org-signup">
-        <h2>Organization Signup</h2>
-        {error && <div style={{color:"red"}}>{error}</div>}
+        
+        {error && <div className="error-msg-org-signup">Error: {error}</div>}
         <span>Organization name
-        <input name="orgname" value={form.orgname} onChange={onChange}/>
+        <input name="orgname" className="input-orgsignup" value={form.orgname} onChange={onChange}/>
         </span>
         <span>Email
-        <input name="email" value={form.email} onChange={onChange} type="email" />
+        <input name="email" className="input-orgsignup" value={form.email} onChange={onChange} type="email" />
         </span>
         <span>Password
-        <input name="password" value={form.password} onChange={onChange} type="password" />
+        <input name="password" className="input-orgsignup" value={form.password} onChange={onChange} type="password" />
         </span>
         <span>Confirm password
-        <input name="confirmPassword" value={form.confirmPassword} onChange={onChange} type="password" />
+        <input name="confirmPassword" className="input-orgsignup" value={form.confirmPassword} onChange={onChange} type="password" />
         </span>
         <span>Main category
-        <select name="category" value={form.category} onChange={onChange} >
+        <select className="select-orgsignup" name="category" value={form.category} onChange={onChange} >
         {mainCategories.map((item) => (
             <option key={item}>{item}</option>
         ))}
         </select>
         </span>
         <span>Donation link
-        <input name="donatelink" value={form.donatelink} onChange={onChange} />
+        <input name="donatelink" className="input-orgsignup" value={form.donatelink} onChange={onChange} />
         </span>
+
         <span>Description of your organization (200 words max)
-        <textarea name="description" value={form.description} onChange={onChange} placeholder="Description" />
+        <textarea name="description"  className="input-orgsignup-description"value={form.description} onChange={onChange} />
         </span>
-        <span>Latitude of your main office
-        <input name="lat" value={form.lat} onChange={onChange} placeholder="Latitude" />
+
+        <span>Logo of your organization (link)
+        <input name="logo" className="input-orgsignup" value={form.logo} onChange={onChange}/>
         </span>
-        <span>Longitude of your main office
-        <input name="lng" value={form.lng} onChange={onChange} placeholder="Longitude" />
-        </span>
-        <button type="submit" disabled={loading}>{loading ? "Creating..." : "Sign up"}</button>
+
+        <button className="orgsignup-submit" type="submit" disabled={loading}>{loading ? "Creating..." : "Sign up! 🥳"}</button>
     </form>
+    </div>
+    </div>
   );
 }
 

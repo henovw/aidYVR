@@ -4,6 +4,7 @@ import SideBar from "./SideBar.jsx"
 import SignupLoginMain from "./SignupLogin.jsx";
 import { useState, useEffect } from "react"
 import "./MainMapApp.css"
+import Logo from "../Logo/Logo.jsx"
 
 function MainMapApp() {
     // charity selection
@@ -43,10 +44,7 @@ function MainMapApp() {
     })
     return (
     <div>
-        <div className="maintitle">
-            <h1>aidYVR</h1>
-            <h2>volunteering-opportunities-vancouver</h2>
-        </div>
+        <Logo/>
         
     <div className="mainmap">
         <SideBar list={filteredCharities} selected={selected} 

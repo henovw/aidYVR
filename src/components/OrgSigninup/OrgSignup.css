@@ -1,8 +1,94 @@
+.orgsignup-main {
+    display: inline-block;
+}
 .org-signup {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-} .org-signup>input {
-    width: 250px;
+    background-image: linear-gradient(0deg, rgb(93, 215, 249), rgb(95, 237, 102));
+    padding: 20px;
+    width: 700px;
+    box-shadow: 0px 0px 5px black;
+    border-radius: 20px;
+    margin: 10px;
+} .org-signup>span {
+    display: flex;
+    flex-direction: column;
+    font-size: larger;
+    font-weight: bold;
+    color: black;
+    gap: 5px;
+} 
+
+.select-orgsignup {
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+} .select-orgsignup:hover {
+    background-color: aqua;
+    cursor: pointer;
+}
+
+.input-orgsignup {
+    outline: none;
+    border: none;
+    width: 300px;
+    padding:10px;
+    border-radius: 20px;
+    transition: 0.2s;
+    text-align: center;
+    background-color: rgb(246, 246, 246);
+} .input-orgsignup:hover {
+    width: 320px;
+    cursor:text;
+    background-color: white;
+}
+
+.input-orgsignup-description {
+    outline: none;
+    border: none;
+    height: 200px;
+    padding:10px;
+    border-radius: 20px;
+}
+
+.orgsignup-description {
+    width: 700px;
+    background-color: rgb(229, 229, 229);
+    padding: 20px;
+    margin: 10px;
+    height: fit-content;
+    border-radius: 20px;
+    display: block;
+} .orgsignup-description>h2 {
+    font-weight: normal;
+    margin: 10px;
+} .orgsignup-description>span {
+    font-size: large;
+}
+
+.orgsignup-submit {
+    outline: none;
+    border: 3px solid black;
+    padding: 20px;
+    font-size: large;
+    font-family: monospace;
+    font-weight: bold;
+    border-radius: 20px;
+} .orgsignup-submit:hover {
+    background-color: yellow;
+    cursor: pointer;
+}
+
+.error-msg-org-signup {
+    color: red;
+    background-color: rgb(215, 215, 215);
+    padding: 10px;
+    border: 5px solid red;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: larger;
 }
