@@ -7,11 +7,11 @@ function SignupLoginMain() {
     return (
         <div style={{"display": "flex"}}>
             
-            <div className="signinup-user-mainpage">
+            {/* <div className="signinup-user-mainpage">
                 <h1>Are you a volunteer?</h1>
                 <span onClick={() => navigate("/user/signin")} className="user-signin-link">Sign into your account</span>
                 <span onClick={() => navigate("/user/signup")} className="user-signup-link">Create an account</span>
-            </div>
+            </div> */}
 
             
             <div className="signinup-org-mainpage">

@@ -78,9 +78,11 @@
     font-family: monospace;
     font-weight: bold;
     border-radius: 20px;
+    font-family: system-ui, Ubuntu;
 } .orgsignup-submit:hover {
     background-color: yellow;
     cursor: pointer;
+    transform: scale(1.02);
 }
 
 .error-msg-org-signup {

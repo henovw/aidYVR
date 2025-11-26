@@ -3,7 +3,7 @@ import Logo from "../Logo/Logo.jsx"
 import { useNavigate } from "react-router-dom";
 import "./OrgSignup.css"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import OrgMainPage from "../OrgMainPage/OrgMainPage.jsx";
+
 
 
 function OrgSignin() {
@@ -45,7 +45,9 @@ function OrgSignin() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Signin failed");
-      
+      console.log(data)
+      localStorage.setItem("orgUser", JSON.stringify(data))
+      navigate("/")
     } catch (err) {
       setError(err.message);
     } finally {

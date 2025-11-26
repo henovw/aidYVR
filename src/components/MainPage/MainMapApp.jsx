@@ -5,6 +5,7 @@ import SignupLoginMain from "./SignupLogin.jsx";
 import { useState, useEffect } from "react"
 import "./MainMapApp.css"
 import Logo from "../Logo/Logo.jsx"
+import OrgView from "./OrgView.jsx";
 
 function MainMapApp() {
     // charity selection
@@ -13,6 +14,8 @@ function MainMapApp() {
 
     // database access
     const [charityData, setData] = useState([])
+    const [orgData, setOrgData] = useState([])
+    const [loggedIn, setLoggedIn] = useState(false)
     useEffect(() => {
         fetch("http://localhost:2000/api/orgsWithJobs")
             .then(res => 
@@ -22,9 +25,21 @@ function MainMapApp() {
                 console.log(data);
                 setData(data);
             })
-            .catch(err => console.error(err))       
+            .catch(err => console.error(err))     
+            
+        const saved = localStorage.getItem("orgUser");
+        if (saved) {
+            setOrgData(JSON.parse(saved)[0]);  
+            setLoggedIn(true)
+        }
     }, [])
 
+    function clear() {
+        localStorage.clear()
+        console.log(localStorage.getItem("orgUser"))
+        setOrgData([])
+        setLoggedIn(false)
+    }
 
     // category selection
     const [selectedCategory, setSelectedCategory] = useState("View all")
@@ -53,7 +68,7 @@ function MainMapApp() {
              />
         <MainMap list={filteredCharities} selected={selected} onSelect={setSelected} />
     </div>
-    <SignupLoginMain/>
+    {loggedIn ?  <OrgView orgData={orgData} clear={clear}/> : <SignupLoginMain/>}
 
     </div>
   )

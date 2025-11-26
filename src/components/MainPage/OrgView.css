@@ -1,0 +1,62 @@
+.orgview-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+}
+.orgview-image-title {
+    background: white;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    padding: 10px 30px 10px 10px;
+    gap: 10px;
+}
+
+.orgview-post {
+    outline: none;
+    border: none;
+    padding: 10px;
+    font-size: larger;
+    border-radius: 20px;
+    font-family: system-ui, Ubuntu;
+    background-image: linear-gradient(20deg, yellow, rgb(243, 245, 182));
+    font-weight: bold;
+    box-shadow: 0px 0px 2px white;
+    transition: 0.2s;
+} .orgview-post:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+.orgview-logout {
+    outline: none;
+    border: none;
+    padding: 10px;
+    font-size: large;
+    border-radius: 20px;
+    font-family: system-ui, Ubuntu;
+    background-color: lightgrey;
+    font-weight: bold;
+    box-shadow: 0px 0px 2px white;
+    transition: 0.2s;
+    border: 4px solid red;
+    color: red;
+} .orgview-logout:hover {
+    transform: scale(1.03);
+    cursor: pointer;
+}
+
+.orgview-main {
+    margin: 20px;
+    background-image: linear-gradient(10deg, rgb(210, 255, 121), rgb(53, 237, 154));
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 30px;
+    gap: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 3px darkgrey;
+    transition: 0.4s;
+}.orgview-main:hover {
+    transform:translateY(-2px);
+    box-shadow: 0px 3px 5px darkgrey;
+}

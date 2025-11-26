@@ -85,6 +85,7 @@
     flex-shrink: 0;
     border: 5px solid black;
     transition: 0.2s;
+    font-family: system-ui, Ubuntu;
 } .donate:hover {
     background-color: rgb(255, 238, 0);
     cursor: pointer;
@@ -126,6 +127,7 @@ a {
     flex-shrink: 0;
     border: 5px solid black;
     transition: 0.2s;
+    font-family: system-ui, Ubuntu;
 } .apply:hover {
     background-color: rgb(107, 255, 93);
     cursor: pointer;
