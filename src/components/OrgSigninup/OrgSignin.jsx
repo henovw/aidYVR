@@ -45,7 +45,6 @@ function OrgSignin() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Signin failed");
-      console.log(data)
       localStorage.setItem("orgUser", JSON.stringify(data))
       navigate("/")
     } catch (err) {

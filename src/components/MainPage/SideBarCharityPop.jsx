@@ -20,10 +20,10 @@ function SideBarCharityPop({ item, onClick, isSelected }) {
         month: "long",
         day: "numeric",
     });
-
+    
     useEffect(() => {
-        if (item.org_categories) {
-            setOrgCategories(item.org_categories.split(";").filter(Boolean));
+        if (item.categories) {
+            setOrgCategories(item.categories.split(";").filter(Boolean));
         }
         if (item.jobneeds) {
             setJobNeeds(item.jobneeds.split(";").filter(Boolean));

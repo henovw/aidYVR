@@ -22,7 +22,6 @@ function MainMapApp() {
                 res.json()
             )
             .then(data => {
-                console.log(data);
                 setData(data);
             })
             .catch(err => console.error(err))     
@@ -36,7 +35,6 @@ function MainMapApp() {
 
     function clear() {
         localStorage.clear()
-        console.log(localStorage.getItem("orgUser"))
         setOrgData([])
         setLoggedIn(false)
     }

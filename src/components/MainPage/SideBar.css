@@ -10,6 +10,7 @@
     height: 120px;
     border: 7px solid black;
     border-radius: 20px;
+    background: white;
 }
 .charity {
     width: 90%;
@@ -40,6 +41,7 @@
     white-space: nowrap;
     flex-shrink: 0;
     margin: 3px;
+    font-family: system-ui, Ubuntu;
 }
 
 .descriptor {
@@ -53,6 +55,7 @@
     margin: 3px;
     width: max-content;
     height: max-content;
+    font-family: system-ui, Ubuntu;
 }
 
 .description {
@@ -105,6 +108,7 @@ a {
     white-space: nowrap;
     flex-shrink: 0;
     margin: 3px;
+    font-family: system-ui, Ubuntu;
 }
 .time {
     padding: 5px;
@@ -115,6 +119,7 @@ a {
     white-space: nowrap;
     flex-shrink: 0;
     margin: 3px;
+    font-family: system-ui, Ubuntu;
 }
 
 .apply {

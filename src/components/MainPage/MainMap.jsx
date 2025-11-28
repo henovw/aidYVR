@@ -35,7 +35,10 @@ function MainMap({ list, selected, onSelect }) {
             });
         } 
     }, [selected])
-
+    
+    if (list.length == 0) {
+        return <div>No jobs to show</div>
+    }
 
     return (
         <div className="mainContainer">
@@ -63,7 +66,7 @@ function MainMap({ list, selected, onSelect }) {
             lat={selected.lat}
             lng={selected.lng}
             img={selected.logo}
-            categories={selected.org_categories}
+            categories={selected.categories}
             needs={selected.jobneeds}
             donatelink={selected.donatelink}
             applylink={selected.applylink}

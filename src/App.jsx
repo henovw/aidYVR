@@ -8,7 +8,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import OrgMainPage from "./components/OrgMainPage/OrgMainPage.jsx";
+import OrgMainPage from "./components/OrgPages/OrgMainPage.jsx";
+import OrgPosting from "./components/OrgPages/OrgPosting.jsx";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -26,7 +27,6 @@ function App() {
     }
     return (
     <Router>
-        <ScrollToTop></ScrollToTop>
         <Routes>
             <Route path="/" element={<MainMapApp/>} />
             {/* user signin and signup */}
@@ -37,6 +37,8 @@ function App() {
                 <Route path="/org/signup" element={<OrgSignup/>} />
             {/* organization main page */}
                 <Route path="/org/main" element={<OrgMainPage/>} />
+            {/* organization post screen */}
+                <Route path="/org/post" element={<OrgPosting/>}/>
 
         </Routes>
     </Router>

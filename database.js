@@ -85,7 +85,7 @@ app.post("/api/org/signup", async (req, res) => {
     res.status(201).json({ success: true, org: result.rows[0] });
   } catch (err) {
     console.error("Signup Error:", err);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error when creating organization" });
   }
 });
 
@@ -103,6 +103,27 @@ app.post("/api/org/signin", async (req, res) => {
 
     const returnable = await client.query("SELECT id, orgname, email, category, donatelink, logo, description FROM organization WHERE email=$1", [email])
     res.json(returnable.rows)
+})
+
+app.post("/api/org/post", async (req, res) => {
+    const { organization_id, title, description, daysperweek, hourspershift, 
+        termlength, applylink, jobneeds, lat, lng, categories } = req.body
+
+    const insertSQL = `INSERT INTO posting 
+        (organization_id, title, description, daysperweek, hourspershift, termlength, applylink, jobneeds, lat, lng, categories) 
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING id
+    `
+
+    try {
+        const result = await client.query(insertSQL, [
+            organization_id, title, description, daysperweek, hourspershift, termlength, applylink,
+            jobneeds, lat, lng, categories
+        ])
+        res.status(201).json({ success: true, org: result.rows[0] })
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ error: "Internal server error when posting job." })
+    }
 })
 
 app.listen(2000, () => console.log("API server running on port 2000"))

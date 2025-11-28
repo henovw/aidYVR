@@ -26,6 +26,7 @@
     white-space: nowrap;
     flex-shrink: 0;
     margin: 3px;
+    font-family: system-ui, Ubuntu;
 }
 
 .categories-minidesc {
@@ -46,6 +47,7 @@
     white-space: nowrap;
     flex-shrink: 0;
     margin: 3px;
+    font-family: system-ui, Ubuntu;
 }
 
 
