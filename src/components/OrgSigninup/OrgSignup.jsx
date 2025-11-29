@@ -5,70 +5,79 @@ import "./OrgSignup.css"
 
 
 function OrgSignup() {
-  const [form, setForm] = useState({
-    orgname: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    category: "",
-    donatelink: "", 
-    description: "",
-    logo: ""
-  });
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
+    const [form, setForm] = useState({
+        orgname: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        category: "",
+        donatelink: "", 
+        logo: ""
+    });
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate()
 
 
-  function onChange(e) {
-    setForm({...form, [e.target.name]: e.target.value});
-  }
-
-  const mainCategories = [
-    "Medical support", "Medical research", "Social support", "Food security", "Child care",
-    "Animal support"
-  ]
-
-  async function onSubmit(e) {
-    e.preventDefault();
-    setError("");
-
-    if (!form.email || !form.password || !form.orgname) {
-      setError("Org name, email and password are required.");
-      return;
+    function onChange(e) {
+        setForm({...form, [e.target.name]: e.target.value});
     }
-    if (form.password !== form.confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
-    setLoading(true);
 
-    try {
-      const res = await fetch("http://localhost:2000/api/org/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          orgname: form.orgname,
-          email: form.email,
-          password: form.password,
-          category: form.category,
-          donatelink: form.donatelink, 
-          description: form.description,
-          logo: form.logo
-        })
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Signup failed");
-      alert("Organization created!");
-      navigate("/")
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  }
+    const [description, setDescription] = useState("")
+    const [charRemaining, setCharRemaining] = useState(200)
 
-  return (
+    function onChangeDescription(e) {
+        if (e.target.value.length <= 200) {
+            setDescription(e.target.value)
+            setCharRemaining(200 - e.target.value.length)
+        }
+    }
+
+    const mainCategories = [
+        "Medical support", "Medical research", "Social support", "Food security", "Child care",
+        "Animal support"
+    ]
+
+    async function onSubmit(e) {
+        e.preventDefault();
+        setError("");
+
+        if (!form.email || !form.password || !form.orgname) {
+        setError("Org name, email and password are required.");
+        return;
+        }
+        if (form.password !== form.confirmPassword) {
+        setError("Passwords do not match.");
+        return;
+        }
+        setLoading(true);
+
+        try {
+            const res = await fetch("http://localhost:2000/api/org/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                orgname: form.orgname,
+                email: form.email,
+                password: form.password,
+                category: form.category,
+                donatelink: form.donatelink, 
+                description: description,
+                logo: form.logo
+            })
+        });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || "Signup failed");
+            alert("Organization created!");
+            navigate("/")
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    return (
     <div><Logo/>
     
     <div className="orgsignup-main">
@@ -106,8 +115,9 @@ function OrgSignup() {
         <input name="donatelink" className="input-orgsignup" value={form.donatelink} onChange={onChange} />
         </span>
 
-        <span>Description of your organization (200 words max)
-        <textarea name="description"  className="input-orgsignup-description"value={form.description} onChange={onChange} />
+        <span>Description of your organization (200 character max)
+        <textarea name="description"  className="input-orgsignup-description"value={description} onChange={onChangeDescription} />
+        <p style={{"font-weight": "normal" }}>{charRemaining} characters remaining</p>
         </span>
 
         <span>Logo of your organization (link)

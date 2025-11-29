@@ -17,15 +17,21 @@ function MainMapApp() {
     const [orgData, setOrgData] = useState([])
     const [loggedIn, setLoggedIn] = useState(false)
     useEffect(() => {
-        fetch("http://localhost:2000/api/orgsWithJobs")
-            .then(res => 
-                res.json()
-            )
-            .then(data => {
-                setData(data);
-            })
-            .catch(err => console.error(err))     
-            
+        const loadData = async () => {
+            try {
+                await fetch("http://localhost:2000/api/orgsWithJobs")
+                    .then(res => 
+                        res.json()
+                    )
+                    .then(data => {
+                        setData(data);
+                    })  
+            } catch (err) {
+                console.err(err);
+            }
+        }    
+        loadData() 
+        
         const saved = localStorage.getItem("orgUser");
         if (saved) {
             setOrgData(JSON.parse(saved)[0]);  
