@@ -1,14 +1,15 @@
+import { Link } from "react-router-dom"
 import "./Logo.css"
-import { useNavigate } from "react-router-dom"
 
 function Logo() {
-    const navigate = useNavigate();
     return (
         <div>
-            <div className="maintitle" onClick={() => navigate("/")}>
+            <Link to="/">
+            <div className="maintitle">
             <h1>aidYVR</h1>
             <h2>volunteering-opportunities-vancouver</h2>
             </div>
+            </Link>
         </div>
     )
 }

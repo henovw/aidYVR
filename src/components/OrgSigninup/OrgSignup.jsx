@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import Logo from "../Logo/Logo.jsx"
 import { useNavigate } from "react-router-dom";
 import "./OrgSignup.css"
 
@@ -78,7 +77,7 @@ function OrgSignup() {
     }
 
     return (
-    <div><Logo/>
+    <div>
     
     <div className="orgsignup-main">
     <div className="orgsignup-description">
@@ -117,7 +116,7 @@ function OrgSignup() {
 
         <span>Description of your organization (200 character max)
         <textarea name="description"  className="input-orgsignup-description"value={description} onChange={onChangeDescription} />
-        <p style={{"font-weight": "normal" }}>{charRemaining} characters remaining</p>
+        <p style={{"fontWeight": "normal" }}>{charRemaining} characters remaining</p>
         </span>
 
         <span>Logo of your organization (link)

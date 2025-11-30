@@ -113,3 +113,21 @@
     cursor: pointer;
     transform: scale(1.02);
 }
+
+.orgpost-image-marker-text {
+    text-wrap-mode:nowrap;
+    text-overflow: none;
+    background-color: white;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+.orgpost-image-marker-div {
+    padding: 15px;
+    transform: translateX(-50%);
+    width: 120px;
+
+    
+    
+}

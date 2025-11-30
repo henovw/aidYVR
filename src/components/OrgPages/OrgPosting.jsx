@@ -1,16 +1,23 @@
-import Logo from "../Logo/Logo.jsx"
-import { useNavigate } from "react-router-dom";
+
 import { useEffect, useState } from "react"
 import "./OrgPosting.css"
 import GoogleMapReact from 'google-map-react';
 import getAddress from "../utils/geocode.jsx"
+import { useParams, useNavigate } from "react-router-dom";
+
 
 const ImageMarker = (props) => (
+    <div>
     <div className="iconDiv">
       <img 
         className="iconImage"
         src={props.logo}
       />
+      
+    </div>
+    <div className="orgpost-image-marker-div">
+    <span className="orgpost-image-marker-text">{props.address}</span>
+    </div>
     </div>
   );
 
@@ -26,16 +33,21 @@ function OrgPosting() {
     });
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate()
 
-    const orgID = JSON.parse(localStorage.getItem("orgUser"))[0].id
+    const orgID = useParams().id;
 
     const [address, setAddress] = useState("")
+    const [imageAddress, setImageAddress] = useState("")
 
     function onChangeAddress(e) { setAddress(e.target.value) }
 
     const [lat, setLat] = useState(49.267535)
     const [lng, setLng] = useState(-123.128936)
+
+    const [defaultlat, setDefaultLat] = useState(49.267535)
+    const [defaultlng, setDefaultLng] = useState(-123.128936)
+
+    const navigate = useNavigate()
     
 
     const getGeocodeAddress = async (e) => {
@@ -43,7 +55,10 @@ function OrgPosting() {
         try {
             const { lat, lng } = await getAddress(address)
             setLat(lat);
-            setLng(lng)
+            setLng(lng);
+            setDefaultLat(lat)
+            setDefaultLng(lng)
+            setImageAddress(address)
         } catch (err) {
             setError(err.message)
         }
@@ -107,7 +122,6 @@ function OrgPosting() {
 
     return (
         <div>
-            <Logo/>
             
         <div className="orgpost-main">
             <div className="orgsignup-description">
@@ -126,7 +140,7 @@ function OrgPosting() {
             </span>
             <span>Job description (200 character max)
             <textarea name="description" className="input-orgpost-description" value={description} onChange={onChangeDescription} type="email" />
-            <p style={{"font-weight": "normal"}}>{charRemaining} characters remaining</p>
+            <p style={{"fontWeight": "normal"}}>{charRemaining} characters remaining</p>
             </span>
             <span>Job requirements (separate with ;)
             <textarea name="jobneeds" className="input-orgpost" value={form.jobneeds} onChange={onChange}/>
@@ -147,11 +161,11 @@ function OrgPosting() {
             <div className="map-orgpost">
             <GoogleMapReact
             bootstrapURLKeys={{ key: apiKey }}
-            center={{lat: lat, lng: lng}}
-            defaultZoom={12.4}
+            center={{ lat: defaultlat, lng: defaultlng }}
+            defaultZoom={12.3}
             >
 
-                <ImageMarker logo={logo} address={address}/>
+                <ImageMarker logo={logo} address={imageAddress} lat={lat} lng={lng}/>
             </GoogleMapReact>
             </div>
             <input name="address" className="input-orgpost-map" value={address} onChange={onChangeAddress} type="address"/>

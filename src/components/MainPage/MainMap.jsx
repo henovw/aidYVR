@@ -20,7 +20,7 @@ function MainMap({ list, selected, onSelect }) {
           lng: -123.128936
         },
         zoom: 12.3
-      };
+    };
     const apiKey=import.meta.env.VITE_API_KEY
 
     const handleClick = ({lat, lng, item}) => {
@@ -36,9 +36,9 @@ function MainMap({ list, selected, onSelect }) {
         } 
     }, [selected])
     
-    if (list.length == 0) {
-        return <div>No jobs to show</div>
-    }
+    // if (list.length == 0) {
+    //     return <div>No jobs to show</div>
+    // }
 
     return (
         <div className="mainContainer">

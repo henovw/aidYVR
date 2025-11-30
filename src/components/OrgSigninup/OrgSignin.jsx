@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import Logo from "../Logo/Logo.jsx"
 import { useNavigate } from "react-router-dom";
 import "./OrgSignup.css"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -56,7 +55,6 @@ function OrgSignin() {
 
   return (
     <div>
-    <Logo/>
     
     <div className="orgsignup-main">
     <div className="orgsignup-description">

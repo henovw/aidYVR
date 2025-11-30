@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react"
 import "./OrgView.css"
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom" 
 
 function OrgView({ orgData, clear }) {
 
-    const navigate = useNavigate()
 
     return (
         <div className="orgview-main">
@@ -12,8 +11,12 @@ function OrgView({ orgData, clear }) {
             <img className="orgview-image" src={orgData.logo}/>
             <h1 className="orgview-title">{orgData.orgname}</h1>
             </div>
-            
-            <button onClick={() => navigate("/org/post")} className="orgview-post">Post an opportunity 🥹</button>
+            <Link to={`/org/post/new/${orgData.id}`}>
+            <button className="orgview-post">Post an opportunity 🥹</button>
+            </Link>
+            <Link to={`/org/post/previous/${orgData.id}`}>
+            <button className="orgview-previous-posts">View posted opportunities</button>
+            </Link>
             <button onClick={clear} className="orgview-logout">Logout</button>
             
         </div>
