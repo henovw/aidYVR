@@ -34,6 +34,7 @@ app.get("/api/orgsWithJobs", async (req, res) => {
                 p.termlength,
                 p.applylink,
                 p.jobneeds,
+                p.address,
                 o.id AS organization_id,
                 o.orgname,
                 o.email,
@@ -101,28 +102,78 @@ app.post("/api/org/signin", async (req, res) => {
     const ok = await bcrypt.compare(password, user.hashed_password);
     if (!ok) throw new Error("Invalid credentials.");
 
-    const returnable = await client.query("SELECT id, orgname, email, category, donatelink, logo, description FROM organization WHERE email=$1", [email])
+    const returnable = await client.query("SELECT id, orgname, email, category, donatelink, logo, description, address FROM organization WHERE email=$1", [email])
     res.json(returnable.rows)
 })
 
 app.post("/api/org/post", async (req, res) => {
     const { organization_id, title, description, daysperweek, hourspershift, 
-        termlength, applylink, jobneeds, lat, lng, categories } = req.body
+        termlength, applylink, jobneeds, lat, lng, categories, address } = req.body
 
     const insertSQL = `INSERT INTO posting 
-        (organization_id, title, description, daysperweek, hourspershift, termlength, applylink, jobneeds, lat, lng, categories) 
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING id
+        (organization_id, title, description, daysperweek, hourspershift, termlength, applylink, jobneeds, lat, lng, categories, address) 
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING id;
     `
 
     try {
         const result = await client.query(insertSQL, [
             organization_id, title, description, daysperweek, hourspershift, termlength, applylink,
-            jobneeds, lat, lng, categories
+            jobneeds, lat, lng, categories, address
         ])
         res.status(201).json({ success: true, org: result.rows[0] })
     } catch (err) {
         console.error(err)
         res.status(500).json({ error: "Internal server error when posting job." })
+    }
+})
+
+app.post("/api/org/addresses", async (req, res) => {
+    const { organization_id } = req.body
+    try {
+        const result = await client.query(`
+            SELECT address FROM posting WHERE organization_id = ($1)
+            `, [organization_id])
+        res.json(result.rows)
+    } catch (e) {
+        res.status(500).json({ error: e.message })
+    }
+})
+
+app.post("/api/org/previousposts", async (req, res) => {
+    const { organization_id } = req.body
+    try {
+        const result = await client.query(`
+                SELECT 
+                    p.id AS job_id,
+                    p.title,
+                    p.description AS job_description,
+                    p.posted_date,
+                    p.daysperweek,
+                    p.hourspershift,
+                    p.termlength,
+                    p.applylink,
+                    p.jobneeds,
+                    p.address,
+                    o.id AS organization_id,
+                    o.orgname,
+                    o.email,
+                    o.category AS org_category,
+                    o.donatelink,
+                    p.categories AS categories,
+                    p.lat,
+                    p.lng,
+                    o.logo,
+                    o.description AS org_description
+                FROM posting p
+                JOIN organization o
+                ON p.organization_id = o.id
+                WHERE o.id = ($1)
+                ORDER BY o.id, p.id;
+                `, [organization_id])
+
+        res.json(result.rows)
+    } catch (e) {
+        res.status(500).json({ error: e.message })
     }
 })
 

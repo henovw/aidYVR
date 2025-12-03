@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import "./OrgSignup.css"
+import Logo from "../Logo/Logo";
 
 
 function OrgSignup() {
@@ -77,8 +78,8 @@ function OrgSignup() {
     }
 
     return (
-    <div>
-    
+    <div key="orgsignup">
+    <Logo/>
     <div className="orgsignup-main">
     <div className="orgsignup-description">
         <h1 className="orgsignup-title">Register your Organization</h1> 

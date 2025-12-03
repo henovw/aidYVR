@@ -12,7 +12,7 @@ function SearchBar({ selectCategory, onSelectCategory, categories, selectItem })
         <div className="searchbar-main">
             <div className="searchbar-categories">
             {categories.map((item) => (
-                <span className={`searchbar-category ${selectCategory === item ? "selected-searchbar" : ""}`}
+                <span key={item} className={`searchbar-category ${selectCategory === item ? "selected-searchbar" : ""}`}
                     onClick={() => onClickedCategory(item)}>{item}</span>
             ))}
             </div>

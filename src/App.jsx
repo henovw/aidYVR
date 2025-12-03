@@ -13,9 +13,7 @@ import PreviousPostings from "./components/OrgPages/PreviousPostings.jsx"
 
 
 function App() {
-    window.onbeforeunload = function () {
-        window.scrollTo(0, 0)
-    }
+    
     return (
     <Routes>
         <Route path="/" element={<MainMapApp/>} />

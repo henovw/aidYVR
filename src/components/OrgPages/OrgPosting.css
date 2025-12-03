@@ -125,9 +125,10 @@
 
 .orgpost-image-marker-div {
     padding: 15px;
-    transform: translateX(-50%);
-    width: 120px;
+    width: fit-content;
 
+    transform: translateX(-25%);
+    
     
     
 }

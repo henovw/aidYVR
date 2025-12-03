@@ -4,6 +4,7 @@ import "./OrgPosting.css"
 import GoogleMapReact from 'google-map-react';
 import getAddress from "../utils/geocode.jsx"
 import { useParams, useNavigate } from "react-router-dom";
+import Logo from "../Logo/Logo.jsx"
 
 
 const ImageMarker = (props) => (
@@ -16,10 +17,10 @@ const ImageMarker = (props) => (
       
     </div>
     <div className="orgpost-image-marker-div">
-    <span className="orgpost-image-marker-text">{props.address}</span>
+    <span className="orgpost-image-marker-text">{props.address == "" ? "Enter address" : props.address}</span>
     </div>
     </div>
-  );
+);
 
 function OrgPosting() {
     const [form, setForm] = useState({
@@ -38,8 +39,27 @@ function OrgPosting() {
 
     const [address, setAddress] = useState("")
     const [imageAddress, setImageAddress] = useState("")
+    const [addresses, setAddresses] = useState(["Select address"])
 
     function onChangeAddress(e) { setAddress(e.target.value) }
+    const onChangeImageAddress = async (e) => {
+        if (e.target.value == "Select address") {
+            return
+        }
+        setImageAddress(e.target.value)
+        try {
+            const { lat, lng } = await getAddress(e.target.value)
+            setLat(lat);
+            setLng(lng);
+            setDefaultLat(lat)
+            setDefaultLng(lng)
+            
+            setAddress(e.target.value)
+            console.log(e.target.value)
+        } catch (err) {
+            setError(err.message)
+        }
+    }
 
     const [lat, setLat] = useState(49.267535)
     const [lng, setLng] = useState(-123.128936)
@@ -64,6 +84,31 @@ function OrgPosting() {
         }
     }
 
+    useEffect(() => {
+        const getAddresses = async () => {
+            try {
+                const res = await fetch("http://localhost:2000/api/org/addresses", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        organization_id: orgID
+                    })
+                });
+                const data = await res.json()
+                data.map((item) => {
+                    if (!addresses.includes(item.address)) {
+                        setAddresses(addresses.concat([item.address]))
+                    }
+                })
+            
+            } catch (err) {
+                setError(err.message);
+            } 
+        }
+        getAddresses()
+        
+    })
+
     const [description, setDescription] = useState("")
     const [charRemaining, setCharRemaining] = useState(200)
 
@@ -86,7 +131,7 @@ function OrgPosting() {
         e.preventDefault();
         setError("");
 
-        if (!form.title || !form.categories) {
+        if (!form.title || !form.categories || !imageAddress) {
             setError("All fields are required.");
             return;
         }
@@ -107,7 +152,8 @@ function OrgPosting() {
                     jobneeds: form.jobneeds,
                     lat: lat,
                     lng: lng,
-                    categories: form.categories
+                    categories: form.categories,
+                    address: address
                 })
             });
             const data = await res.json();
@@ -122,7 +168,7 @@ function OrgPosting() {
 
     return (
         <div>
-            
+            <Logo/>
         <div className="orgpost-main">
             <div className="orgsignup-description">
             <h1>Make an opportunity posting</h1> 
@@ -133,7 +179,6 @@ function OrgPosting() {
             </span>
         </div>
         <form onSubmit={onSubmit} className="orgpost-form">
-            
             {error && <div className="error-msg-org-signup">Error: {error}</div>}
             <span>Position title
             <input name="title" className="input-orgpost" value={form.title} onChange={onChange}/>
@@ -170,7 +215,16 @@ function OrgPosting() {
             </div>
             <input name="address" className="input-orgpost-map" value={address} onChange={onChangeAddress} type="address"/>
             <button onClick={getGeocodeAddress} type="submit" className="orgpost-submit-address">Check address</button>
+            <div className="orgpost-select-addresses">
+            <p>Past addresses:</p>
+            <select name="imageAddress" className="select-orgsignup" value={imageAddress} onChange={onChangeImageAddress}>
+                {addresses.map((item) => (
+                    <option value={item} key={item}>{item}</option>
+                ))}
+            </select>
+            </div>
             </span>
+            
             
             <span>Application link
             <input name="applylink" className="input-orgpost" value={form.applylink} onChange={onChange} />

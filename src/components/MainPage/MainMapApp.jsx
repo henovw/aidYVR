@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import "./MainMapApp.css"
 import Logo from "../Logo/Logo.jsx"
 import OrgView from "./OrgView.jsx";
+import axios from "axios"
 
 function MainMapApp() {
     // charity selection
@@ -13,7 +14,7 @@ function MainMapApp() {
 
 
     // database access
-    const [charityData, setData] = useState([])
+    const [charityData, setCharityData] = useState([])
     const [orgData, setOrgData] = useState([])
     const [loggedIn, setLoggedIn] = useState(false)
     useEffect(() => {
@@ -24,12 +25,14 @@ function MainMapApp() {
                         res.json()
                     )
                     .then(data => {
-                        setData(data);
+                        setCharityData(data);
                     })  
             } catch (err) {
                 console.err(err);
             }
         }    
+
+        
         loadData() 
         
         const saved = localStorage.getItem("orgUser");
@@ -61,6 +64,7 @@ function MainMapApp() {
             return item.org_category == selectedCategory
         }
     })
+
     return (
     <div>
         <Logo/>
@@ -70,7 +74,8 @@ function MainMapApp() {
             onSelect={setSelected} onSelectCategory={setSelectedCategory}
             categories = {categories} selectCategory={selectedCategory}
              />
-        <MainMap list={filteredCharities} selected={selected} onSelect={setSelected} />
+        <MainMap list={filteredCharities} selected={selected} onSelect={setSelected}/> 
+        
     </div>
     {loggedIn ?  <OrgView orgData={orgData} clear={clear}/> : <SignupLoginMain/>}
 

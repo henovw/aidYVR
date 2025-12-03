@@ -1,0 +1,43 @@
+.previous-posting-main {
+    display: inline-block;
+    align-items: center;
+}
+
+.previous-posting-individual {
+    background-image: linear-gradient(40deg, rgb(108, 255, 253), rgb(110, 137, 255));
+    margin: 10px;
+    border-radius: 20px;
+    width: 700px;
+    
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    font-size: large;
+} 
+
+.previous-posting-individual-textbox-description {
+    background-color: rgb(249, 249, 249);
+    padding: 10px;
+    border-radius: 20px;
+    margin: 10px;
+    font-size: larger;
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.category {
+    font-size: small;
+    overflow:auto; 
+}
+
+.time {
+    font-size: small;
+}
+
+.previous-posting-individual-textbox-links {
+    font-size:x-small;
+    padding: 15px;
+}
