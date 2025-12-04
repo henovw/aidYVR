@@ -19,7 +19,8 @@ function OrgMainPage() {
     const orgID = useParams().id;
 
     const [postData, setPostData] = useState([])
-    const loadData = async () => {
+    const [orgData, setOrgData] = useState([])
+    const loadPostData = async () => {
         try {
             const res = await fetch("http://localhost:2000/api/org/previousposts", {
             method: "POST",
@@ -29,7 +30,6 @@ function OrgMainPage() {
             })
         });
         const data = await res.json();
-        console.log(data)
         setPostData(data)
         if (!res.ok) throw new Error(data.error || "Post failed");
         } catch (err) {
@@ -37,8 +37,27 @@ function OrgMainPage() {
         }
     }
 
+    const loadOrgData = async () => {
+        try {
+            const res = await fetch("http://localhost:2000/api/org/details", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    id: orgID
+                })
+            })
+            const data = await res.json()
+            setOrgData(data)
+            console.log(data)
+            if (!res.ok) throw new Error(data.error)
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     useEffect(() => {
-        loadData()
+        loadOrgData()
+        loadPostData()
     }, [])
 
     const deletePost = async (item) => {
@@ -79,6 +98,19 @@ function OrgMainPage() {
             </div>
 
             <div className="orgmainpage-org-div">
+            <h1>{orgData.orgname}</h1>
+            <p>{orgData.email}</p>
+            <img src={orgData.logo}></img>
+           
+            <div className="orgmain-textbox-description">
+            <span>{orgData.description}</span>
+            <br></br>
+            <span className="orgmainpage-org-category">{orgData.category}</span>
+            </div>
+            <div className="previous-posting-buttons"> 
+            <button 
+            className="previous-posting-buttons-edit">Edit</button>
+            </div>
             </div>
 
 
@@ -118,13 +150,10 @@ function OrgMainPage() {
                     <div className="previous-posting-buttons"> 
 
                     <button 
-
                     className="previous-posting-buttons-edit">Edit</button>
-
                     <button 
                     onClick={() => deletePost(item)}
                     className="previous-posting-buttons-delete">Delete</button>
-
                     </div>
                 </div>
             ))}

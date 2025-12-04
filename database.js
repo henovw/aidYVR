@@ -62,8 +62,8 @@ app.post("/api/org/details", async (req, res) => {
         const result = await client.query(`
             SELECT orgname, email, category, 
             logo, description FROM organization WHERE id = $1`, [id])
-
-        res.status(201).json({ success: true, org: result.rows[0] });
+        
+        res.json(result.rows[0])
 
     } catch (e) {
         res.status(500).json({ error: e.message })

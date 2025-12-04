@@ -1,5 +1,5 @@
 import "./App.css";
-import MainMapApp from "./components/UserMainPage/MainMapApp.jsx"
+import MainMapApp from "./components/MapMainPage/MainMapApp.jsx"
 import UserSignin from "./components/UserSigninup/UserSignin.jsx"
 import UserSignup from "./components/UserSigninup/UserSignup.jsx"
 import OrgSignin from "./components/OrgSigninup/OrgSignin.jsx"
