@@ -1,0 +1,101 @@
+.previous-posting-main {
+    display: inline-block;
+    align-items: center;
+}
+
+.previous-posting-individual {
+    background-image: linear-gradient(40deg, rgb(108, 255, 253), rgb(110, 137, 255));
+    margin: 10px;
+    border-radius: 20px;
+    width: 700px;
+    
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    font-size: large;
+} 
+
+.previous-posting-individual-textbox-description {
+    background-color: rgb(249, 249, 249);
+    padding: 10px;
+    border-radius: 20px;
+    margin: 10px;
+    font-size: larger;
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.category {
+    font-size: small;
+    overflow:auto; 
+}
+
+.time {
+    font-size: small;
+}
+
+.previous-posting-individual-textbox-links {
+    font-size:x-small;
+    padding: 15px;
+}
+
+.previous-posting-buttons-edit {
+    padding: 10px 15px 10px 15px;
+    outline: none;
+    border: 8px solid rgb(255, 17, 223);
+    font-family: system-ui, Ubuntu;
+    font-weight: bold;
+    font-size: larger;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px black;
+    transition: 0.2s;
+    margin: 10px;
+} .previous-posting-buttons-edit:hover {
+    box-shadow: 0px 0px 8px black;
+    cursor: pointer;
+    background-color: rgb(252, 196, 255);
+}
+
+.previous-posting-buttons-delete {
+    padding: 10px 15px 10px 15px;
+    outline: none;
+    border: 8px solid rgb(255, 17, 17);
+    font-family: system-ui, Ubuntu;
+    font-weight: bold;
+    font-size: larger;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px black;
+    transition: 0.2s;
+    margin: 10px;
+    background-color: lightgrey;
+} .previous-posting-buttons-delete:hover {
+    box-shadow: 0px 0px 8px black;
+    cursor: pointer;
+    background-color: rgb(255, 196, 196);
+}
+
+.previous-posting-buttons {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.previous-posting-new-post {
+    width: 700px;
+    margin: 10px;
+    outline: none;
+    padding: 20px;
+    border-radius: 20px;
+    border: 10px solid blue;
+    font-family: system-ui, Ubuntu;
+    transition: 0.4s;
+    box-shadow: 0px 0px 5px black;
+} .previous-posting-new-post:hover {
+    transform:scale(1.05);
+    cursor: pointer;
+    box-shadow: 0px 0px 10px black;
+    background: rgb(203, 203, 255);
+}

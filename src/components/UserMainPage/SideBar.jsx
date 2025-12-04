@@ -15,6 +15,9 @@ function SideBar(props) {
             categories={props.categories}
             selectCategory={props.selectCategory}
             selectItem={props.onSelect}
+            orderTypes={props.orderTypes}
+            onSelectOrder={props.onSelectOrder}
+            selectedOrder={props.selectedOrder}
         />
       {props.list.map((item) => (
         <SideBarCharityPop

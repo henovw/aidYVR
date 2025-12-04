@@ -55,7 +55,7 @@ function OrgPosting() {
             setDefaultLng(lng)
             
             setAddress(e.target.value)
-            console.log(e.target.value)
+            
         } catch (err) {
             setError(err.message)
         }

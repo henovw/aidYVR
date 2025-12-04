@@ -14,7 +14,7 @@ function OrgView({ orgData, clear }) {
             <Link to={`/org/post/new/${orgData.id}`}>
             <button className="orgview-post">Post an opportunity 🥹</button>
             </Link>
-            <Link to={`/org/post/previous/${orgData.id}`}>
+            <Link to={`/org/main/${orgData.id}`}>
             <button className="orgview-previous-posts">View posted opportunities</button>
             </Link>
             <button onClick={clear} className="orgview-logout">Logout</button>

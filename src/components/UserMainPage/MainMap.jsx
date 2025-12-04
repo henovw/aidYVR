@@ -17,18 +17,10 @@ const UserMarker = () => (
     <img src="src/assets/Map-Pin.svg" className="mainmap-user-icon"></img>
 )
 
-function MainMap({ list = [], selected, onSelect }) {
-    const [center, setCenter] = useState({ lat: 49.267535, lng: -123.128936 })
-    const [userLocation, setUserLocation] = useState({ lat: 49.267535, lng: -123.128936 })
-    const userAllowedLocation = true
-    const hasZoomedRef = useRef(false)
-    const defaultProps = {
-        center: {
-          lat: 49.267535,
-          lng: -123.128936
-        },
-        zoom: 12.3
-    };
+function MainMap({ list = [], selected, onSelect, userAllowedLocation, userLocation }) {
+    const [center, setCenter] = useState({ lat: 49.267335, lng: -123.128936 })
+    
+    
     const apiKey=import.meta.env.VITE_API_KEY
     const handleClick = ({lat, lng, item}) => {
         onSelect(item)
@@ -41,35 +33,24 @@ function MainMap({ list = [], selected, onSelect }) {
             lng: selected.lng,
             });
         } 
-        if (!hasZoomedRef.current) {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const { latitude, longitude } = position.coords;
-                        setCenter({ lat: latitude, lng: longitude });
-                        setUserLocation({ lat: latitude, lng: longitude });
-                        hasZoomedRef.current = true
-                    
-                        
-                    },
-                    (error) => {
-                        console.error("Error getting location:", error);
-                    }
-                );
-            } else {
-                console.error("Geolocation not supported by this browser.");
-            }
-        }
+        
+        
 
     }, [selected])
+
+    useEffect(() => {
+        if (userAllowedLocation) {
+            setCenter({lat: userLocation.lat, lng: userLocation.lng})
+        }
+    }, [userLocation])
     
     return (
         <div className="mainContainer">
         <GoogleMapReact
-        
+        key={userLocation}
         bootstrapURLKeys={{ key: apiKey }}
         center={{ lat: center.lat, lng: center.lng }}
-        defaultZoom={defaultProps.zoom}
+        defaultZoom={12.3}
         >
         {Array.isArray(list) && list.map((item) => (
             <ImageMarker
@@ -98,7 +79,7 @@ function MainMap({ list = [], selected, onSelect }) {
             />
         )}
 
-        {userAllowedLocation && (
+        {userAllowedLocation.current && (
             <UserMarker
             lat={userLocation.lat}
             lng={userLocation.lng}/>

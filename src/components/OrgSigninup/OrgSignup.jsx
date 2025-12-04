@@ -27,9 +27,9 @@ function OrgSignup() {
     const [charRemaining, setCharRemaining] = useState(200)
 
     function onChangeDescription(e) {
-        if (e.target.value.length <= 200) {
+        if (e.target.value.length <= 300) {
             setDescription(e.target.value)
-            setCharRemaining(200 - e.target.value.length)
+            setCharRemaining(300 - e.target.value.length)
         }
     }
 
@@ -69,7 +69,7 @@ function OrgSignup() {
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || "Signup failed");
             alert("Organization created!");
-            navigate("/")
+            navigate(`/org/main/${data.org.id}`)
         } catch (err) {
             setError(err.message);
         } finally {
@@ -115,7 +115,7 @@ function OrgSignup() {
         <input name="donatelink" className="input-orgsignup" value={form.donatelink} onChange={onChange} />
         </span>
 
-        <span>Description of your organization (200 character max)
+        <span>Description of your organization (300 character max)
         <textarea name="description"  className="input-orgsignup-description"value={description} onChange={onChangeDescription} />
         <p style={{"fontWeight": "normal" }}>{charRemaining} characters remaining</p>
         </span>

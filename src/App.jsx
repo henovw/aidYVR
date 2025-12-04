@@ -1,14 +1,13 @@
 import "./App.css";
-import MainMapApp from "./components/MainPage/MainMapApp.jsx"
+import MainMapApp from "./components/UserMainPage/MainMapApp.jsx"
 import UserSignin from "./components/UserSigninup/UserSignin.jsx"
 import UserSignup from "./components/UserSigninup/UserSignup.jsx"
 import OrgSignin from "./components/OrgSigninup/OrgSignin.jsx"
 import OrgSignup from "./components/OrgSigninup/OrgSignup.jsx"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import OrgMainPage from "./components/OrgPages/OrgMainPage.jsx";
 import OrgPosting from "./components/OrgPages/OrgPosting.jsx";
-import PreviousPostings from "./components/OrgPages/PreviousPostings.jsx"
+import OrgMainPage from "./components/OrgPages/OrgMainPage.jsx"
 
 
 
@@ -28,12 +27,10 @@ function App() {
         {/* organization signin and signup */}
             <Route path="signin" element={<OrgSignin/>} />
             <Route path="signup" element={<OrgSignup/>} />
-        {/* organization main page */}
-            <Route path="main" element={<OrgMainPage/>} />
         {/* organization post screen */}
             <Route path="post/new/:id" element={<OrgPosting/>}/>
         {/* organization view postings */}
-            <Route path="post/previous/:id" element={<PreviousPostings />}/>
+            <Route path="main/:id" element={<OrgMainPage />}/>
         </Route>
         
     </Routes>

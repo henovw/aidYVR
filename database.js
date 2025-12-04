@@ -56,6 +56,20 @@ app.get("/api/orgsWithJobs", async (req, res) => {
     }
 })
 
+app.post("/api/org/details", async (req, res) => {
+    try {
+        const { id } = req.body
+        const result = await client.query(`
+            SELECT orgname, email, category, 
+            logo, description FROM organization WHERE id = $1`, [id])
+
+        res.status(201).json({ success: true, org: result.rows[0] });
+
+    } catch (e) {
+        res.status(500).json({ error: e.message })
+    }
+})
+
 app.post("/api/org/signup", async (req, res) => {
     const { orgname, email, category, donatelink, description,
         logo, password, lat, lng
@@ -102,7 +116,7 @@ app.post("/api/org/signin", async (req, res) => {
     const ok = await bcrypt.compare(password, user.hashed_password);
     if (!ok) throw new Error("Invalid credentials.");
 
-    const returnable = await client.query("SELECT id, orgname, email, category, donatelink, logo, description, address FROM organization WHERE email=$1", [email])
+    const returnable = await client.query("SELECT id, orgname, email, category, donatelink, logo, description FROM organization WHERE email=$1 RETURNING id", [email])
     res.json(returnable.rows)
 })
 
@@ -155,15 +169,9 @@ app.post("/api/org/previousposts", async (req, res) => {
                     p.jobneeds,
                     p.address,
                     o.id AS organization_id,
-                    o.orgname,
-                    o.email,
-                    o.category AS org_category,
-                    o.donatelink,
                     p.categories AS categories,
                     p.lat,
-                    p.lng,
-                    o.logo,
-                    o.description AS org_description
+                    p.lng
                 FROM posting p
                 JOIN organization o
                 ON p.organization_id = o.id
@@ -171,6 +179,18 @@ app.post("/api/org/previousposts", async (req, res) => {
                 ORDER BY o.id, p.id;
                 `, [organization_id])
 
+        res.json(result.rows)
+    } catch (e) {
+        res.status(500).json({ error: e.message })
+    }
+})
+
+app.post("/api/org/deletepost", async (req, res) => {
+    const { job_id } = req.body
+    try {
+        const result = await client.query(`
+            DELETE FROM posting WHERE id = $1::int
+            `, [job_id])
         res.json(result.rows)
     } catch (e) {
         res.status(500).json({ error: e.message })
