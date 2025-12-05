@@ -5,6 +5,7 @@ import UserSignup from "./components/UserSigninup/UserSignup.jsx"
 import OrgSignin from "./components/OrgSigninup/OrgSignin.jsx"
 import OrgSignup from "./components/OrgSigninup/OrgSignup.jsx"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
 
 import OrgPosting from "./components/OrgPages/OrgPosting.jsx";
 import OrgMainPage from "./components/OrgPages/OrgMainPage.jsx"
@@ -15,7 +16,10 @@ function App() {
     
     return (
     <Routes>
+        {/* map page - current website landing */}
         <Route path="/" element={<MainMapApp/>} />
+
+
         {/* user signin and signup */}
         <Route path="/user">
             <Route path="signin" element={<UserSignin/>} />

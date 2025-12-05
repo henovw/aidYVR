@@ -116,7 +116,7 @@ app.post("/api/org/signin", async (req, res) => {
     const ok = await bcrypt.compare(password, user.hashed_password);
     if (!ok) throw new Error("Invalid credentials.");
 
-    const returnable = await client.query("SELECT id, orgname, email, category, donatelink, logo, description FROM organization WHERE email=$1 RETURNING id", [email])
+    const returnable = await client.query("SELECT id, orgname, email, category, donatelink, logo, description FROM organization WHERE email=$1", [email])
     res.json(returnable.rows)
 })
 

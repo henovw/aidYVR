@@ -1,5 +1,5 @@
 import "./OrgMainPage.css"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom" 
 import Logo from "../Logo/Logo.jsx"
 
@@ -20,6 +20,9 @@ function OrgMainPage() {
 
     const [postData, setPostData] = useState([])
     const [orgData, setOrgData] = useState([])
+
+    const dataLoaded = useRef(false)
+
     const loadPostData = async () => {
         try {
             const res = await fetch("http://localhost:2000/api/org/previousposts", {
@@ -31,6 +34,7 @@ function OrgMainPage() {
         });
         const data = await res.json();
         setPostData(data)
+        dataLoaded.current = true   
         if (!res.ok) throw new Error(data.error || "Post failed");
         } catch (err) {
             console.error(err)
@@ -48,17 +52,36 @@ function OrgMainPage() {
             })
             const data = await res.json()
             setOrgData(data)
-            console.log(data)
             if (!res.ok) throw new Error(data.error)
+
         } catch (err) {
             console.error(err)
         }
     }
 
+
     useEffect(() => {
         loadOrgData()
         loadPostData()
+
     }, [])
+
+    useEffect(() => {
+        if (!dataLoaded.current) {
+            return
+        }
+
+        const hash = window.location.hash
+        const element = document.getElementById(hash)
+        if (element) {
+            element.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            })
+        }
+    }, [dataLoaded.current])
+
+    
 
     const deletePost = async (item) => {
         if (!confirm("Are you sure you want to delete this post?")) {
@@ -93,7 +116,7 @@ function OrgMainPage() {
             <div className="previous-posting-main">
 
             <div className="orgsignup-description">
-            <h1>Your Organization</h1>
+            <h1 id="organization-data">Your Organization</h1>
             <span style={{"fontWeight": "normal"}}>View or edit your organization data.</span>
             </div>
 
@@ -116,7 +139,7 @@ function OrgMainPage() {
 
 
 
-            <div className="orgsignup-description">
+            <div className="orgsignup-description"  id="#organization-posts">
             <h1>Your previous posts</h1>
             <span style={{"fontWeight": "normal"}}>View, edit, or delete any of the posts you've previously made.</span>
             </div>
@@ -157,6 +180,7 @@ function OrgMainPage() {
                     </div>
                 </div>
             ))}
+            <div></div>
             <Link to={`/org/post/new/${orgID}`}>
             <button className="previous-posting-new-post">
             <h1>Make a new post! 🤩</h1>

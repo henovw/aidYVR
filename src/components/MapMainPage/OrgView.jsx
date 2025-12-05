@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import "./OrgView.css"
 import { Link } from "react-router-dom" 
+import { HashLink } from 'react-router-hash-link'
 
 function OrgView({ orgData, clear }) {
 
@@ -15,7 +16,11 @@ function OrgView({ orgData, clear }) {
             <button className="orgview-post">Post an opportunity 🥹</button>
             </Link>
             <Link to={`/org/main/${orgData.id}`}>
-            <button className="orgview-previous-posts">View posted opportunities</button>
+            <button className="orgview-organization">View your organization</button>
+            </Link>
+
+            <Link to={`/org/main/${orgData.id}#organization-posts`}>
+            <button className="orgview-previous-posts">View and edit your previous posts</button>
             </Link>
             <button onClick={clear} className="orgview-logout">Logout</button>
             
